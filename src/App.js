@@ -61,6 +61,15 @@ class App extends React.Component {
     return false;
   };
 
+  validateAttr = (attr) => {
+    if (attr.length < 1 || attr < 0) {
+      return false;
+    }
+    const number = Number(attr);
+    const maxValue = 90;
+    return number >= 0 && number <= maxValue;
+  };
+
   render() {
     const {
       cardName,
