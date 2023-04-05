@@ -49,6 +49,18 @@ class App extends React.Component {
     return validate;
   };
 
+  validateSoma = (attr1, attr2, attr3) => {
+    const valorLimite = 210;
+    const a1 = Number(attr1);
+    const a2 = Number(attr2);
+    const a3 = Number(attr3);
+    const soma = a1 + a2 + a3;
+    if (soma <= valorLimite) {
+      return soma;
+    }
+    return false;
+  };
+
   render() {
     const {
       cardName,
