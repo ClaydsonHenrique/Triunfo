@@ -16,6 +16,9 @@ class App extends React.Component {
       cardTrunfo: false,
       hasTrunfo: false,
       cards: [],
+      filterName: '',
+      filterRare: 'todas',
+      filterCheckbox: false,
     };
   }
 
@@ -139,6 +142,10 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
       isSaveButtonDisabled,
+      cards,
+      filterName,
+      filterRare,
+      filterCheckbox,
     } = this.state;
     return (
       <div>
