@@ -15,6 +15,7 @@ class App extends React.Component {
       cardRare: '',
       cardTrunfo: false,
       hasTrunfo: false,
+      isSaveButtonDisabled: true,
       cards: [],
       filterName: '',
       filterRare: 'todas',
@@ -23,8 +24,7 @@ class App extends React.Component {
   }
 
   validateInputs = () => {
-    const {
-      cardName,
+    const { cardName,
       cardDescription,
       cardAttr1,
       cardAttr2,
@@ -35,7 +35,7 @@ class App extends React.Component {
     const validate = (
       cardRare.length > 0
         && cardName.length > 0
-        && cardDescription > 0
+        && cardDescription.length > 0
         && this.validateAttr(cardAttr1)
         && this.validateAttr(cardAttr2)
         && this.validateAttr(cardAttr3)
@@ -83,8 +83,7 @@ class App extends React.Component {
   };
 
   onSaveButtonClick = () => {
-    const {
-      cardName,
+    const { cardName,
       cardDescription,
       cardAttr1,
       cardAttr2,
@@ -95,7 +94,6 @@ class App extends React.Component {
       hasTrunfo,
       cardTrunfo,
     } = this.state;
-
     const card = {
       nome: cardName,
       description: cardDescription,
@@ -112,7 +110,7 @@ class App extends React.Component {
       cardName: '',
       cardDescription: '',
       cardImage: '',
-      cardRare: '',
+      cardRare: 'normal',
       cardAttr1: '0',
       cardAttr2: '0',
       cardAttr3: '0',
@@ -123,7 +121,8 @@ class App extends React.Component {
 
   deleteCard = (card) => {
     const { cards, hasTrunfo } = this.state;
-    card.splice(card, 1);
+    cards.splice(card, 1);
+
     this.setState({
       cards,
       hasTrunfo: card.cardTrunfo ? false : hasTrunfo,
@@ -131,8 +130,7 @@ class App extends React.Component {
   };
 
   render() {
-    const {
-      cardName,
+    const { cardName,
       cardDescription,
       cardAttr1,
       cardAttr2,
@@ -145,18 +143,19 @@ class App extends React.Component {
       cards,
       filterName,
       filterRare,
-      filterCheckbox,
-    } = this.state;
+      filterCheckbox } = this.state;
 
-    let filteredCards = cards.filter((card) => card.nome === filterName);
+    let filteredCards = cards.filter((card) => card.nome.includes(filterName));
 
     if (filterRare !== 'todas') {
-      filteredCards = filrerdCards.filter((card) => card.rare === filterRare);
+      filteredCards = filteredCards.filter((card) => card.rare === filterRare);
     }
 
     if (filterCheckbox) {
       filteredCards = filteredCards.filter((card) => card.cardTrunfo);
     }
+
+    console.log(filteredCards, filterRare);
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -191,7 +190,13 @@ class App extends React.Component {
           data-testid="name-filter"
           onChange={ this.onInputChange }
         />
-        <select>
+        <select
+          disabled={ filterCheckbox }
+          data-testid="rare-filter"
+          onChange={ this.onInputChange }
+          name="filterRare"
+          defaultValue="todas"
+        >
           <option value="todas">todas</option>
           <option value="normal">normal</option>
           <option value="raro">raro</option>
