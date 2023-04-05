@@ -118,6 +118,15 @@ class App extends React.Component {
     });
   };
 
+  deleteCard = (card) => {
+    const { cards, hasTrunfo } = this.state;
+    card.splice(card, 1);
+    this.setState({
+      cards,
+      hasTrunfo: card.cardTrunfo ? false : hasTrunfo,
+    });
+  };
+
   render() {
     const {
       cardName,
