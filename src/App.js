@@ -70,6 +70,14 @@ class App extends React.Component {
     return number >= 0 && number <= maxValue;
   };
 
+  onInputChange = ({ target }) => {
+    const { name, type } = target;
+    const value = type === 'checkbox' ? target.checked : target.value;
+    this.setState({
+      [name]: value,
+    }, this.validateInputs);
+  };
+
   render() {
     const {
       cardName,
