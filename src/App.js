@@ -198,6 +198,13 @@ class App extends React.Component {
           <option value="muito raro">muito-raro</option>
         </select>
 
+        <input
+          name="filterCheckbox"
+          type="checkbox"
+          data-testid="trunfo-filter"
+          onChange={ this.onInputChange }
+        />
+
       </div>
     );
   }
