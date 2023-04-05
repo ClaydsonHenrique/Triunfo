@@ -15,6 +15,7 @@ class App extends React.Component {
       cardRare: '',
       cardTrunfo: false,
       hasTrunfo: false,
+      cards: [],
     };
   }
 
@@ -76,6 +77,45 @@ class App extends React.Component {
     this.setState({
       [name]: value,
     }, this.validateInputs);
+  };
+
+  onSaveButtonClick = () => {
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardRare,
+      cardImage,
+      cards,
+      hasTrunfo,
+      cardTrunfo,
+    } = this.state;
+
+    const card = {
+      nome: cardName,
+      description: cardDescription,
+      image: cardImage,
+      rare: cardRare,
+      attr1: cardAttr1,
+      attr2: cardAttr2,
+      attr3: cardAttr3,
+      cardTrunfo,
+    };
+    cards.push(card);
+    this.setState({
+      cards,
+      cardName: '',
+      cardDescription: '',
+      cardImage: '',
+      cardRare: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      hasTrunfo: hasTrunfo || cardTrunfo,
+      cardTrunfo: false,
+    });
   };
 
   render() {
