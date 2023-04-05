@@ -148,7 +148,7 @@ class App extends React.Component {
       filterCheckbox,
     } = this.state;
 
-    const filteredCards = cards.filter((card) => card.rare === filterRare);
+    let filteredCards = cards.filter((card) => card.nome === filterName);
 
     if (filterRare !== 'todas') {
       filteredCards = filrerdCards.filter((card) => card.rare === filterRare);
@@ -204,6 +204,30 @@ class App extends React.Component {
           data-testid="trunfo-filter"
           onChange={ this.onInputChange }
         />
+
+        {
+          filteredCards.length > 0
+            ? filteredCards.map((card, index) => (
+              <div key={ index }>
+                <Card
+                  cardName={ card.nome }
+                  cardDescription={ card.description }
+                  cardAttr1={ card.attr1 }
+                  cardAttr2={ card.attr2 }
+                  cardAttr3={ card.attr3 }
+                  cardImage={ card.image }
+                  cardRare={ card.rare }
+                  cardTrunfo={ card.cardTrunfo }
+                />
+                <button
+                  data-testid="delete-button"
+                  onClick={ () => this.deleteCard(card) }
+                >
+                  Excluir
+                </button>
+              </div>))
+            : ''
+        }
 
       </div>
     );
