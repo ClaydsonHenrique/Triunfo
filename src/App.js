@@ -191,6 +191,12 @@ class App extends React.Component {
           data-testid="name-filter"
           onChange={ this.onInputChange }
         />
+        <select>
+          <option value="todas">todas</option>
+          <option value="normal">normal</option>
+          <option value="raro">raro</option>
+          <option value="muito raro">muito-raro</option>
+        </select>
 
       </div>
     );
