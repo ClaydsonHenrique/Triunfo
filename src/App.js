@@ -80,6 +80,7 @@ class App extends React.Component {
     this.setState({
       [name]: value,
     }, this.validateInputs);
+    console.log(name);
   };
 
   onSaveButtonClick = () => {
@@ -155,7 +156,6 @@ class App extends React.Component {
       filteredCards = filteredCards.filter((card) => card.cardTrunfo);
     }
 
-    console.log(filteredCards, filterRare);
     return (
       <div>
         <h1>Tryunfo</h1>
